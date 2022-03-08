@@ -10,10 +10,22 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
   templateUrl: './crear-empleadoAgenda.component.html',
   styleUrls: ['./crear-empleadoAgenda.component.css']
 })
+
+/**
+ * exportamos la clase CrearEmpleadoComponent  esta clase tiene una particularidad
+ * por que estamos creando y actualizando desde esta misma usando el mismo formulario
+ * es una herramienta que nos brinda angular con los FormGroup
+ * 
+ * @author [Yeferson Valencia, alejandro.yandd@gmail.com.
+ * @since [1.0.0]
+ *
+ */
 export class CrearEmpleadoComponent implements OnInit {
   empleadoForm: FormGroup;
   titulo = 'Crear empleado';
   id: string | null;
+  //en el constructor añadimos  ToastrService para el diseño de los mensajes cada que activamos un evento
+  // private _empleadoService para accer a los metodos de las apis en Services
   constructor(private fb: FormBuilder,
               private router: Router,
               private toastr: ToastrService,
@@ -29,9 +41,11 @@ export class CrearEmpleadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //metodo que inicia por defecto 
     this.esEditar();
   }
 
+  //metodo para agregar  un empleado y editarlo 
   agregarEmpleado() {
 
     const EMPLEADO: Empleado = {
@@ -47,7 +61,7 @@ export class CrearEmpleadoComponent implements OnInit {
         this.router.navigate(['/']);
       })
     }else{
-      //agregar producto
+      //agregar empleado
       console.log(EMPLEADO);
     this._empleadoService.guardarEmpleado(EMPLEADO).subscribe(data => {
       this.toastr.success('El producto fue registrado con exito!', 'Producto Registrado!');
@@ -59,7 +73,7 @@ export class CrearEmpleadoComponent implements OnInit {
     }
   }
   
-
+ //metodo para editar empleado
   esEditar() {
 
     if(this.id !== null) {
