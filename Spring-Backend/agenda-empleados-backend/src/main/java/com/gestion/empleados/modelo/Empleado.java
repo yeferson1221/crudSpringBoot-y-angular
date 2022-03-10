@@ -56,7 +56,7 @@ public class Empleado {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		this.email = tel;
+		this.tel = tel;
 	}
 	
 	
